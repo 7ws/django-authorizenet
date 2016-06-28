@@ -26,6 +26,13 @@ TEST_NUMBERS = [
 ]
 
 
+# Python 3 support
+try:
+    basestring
+except NameError:
+    basestring = (str, bytes,)
+
+
 def verify_credit_card(number, allow_test=False):
     """Returns the card type for given card number or None if invalid."""
     return CreditCard(number).verify(allow_test)
@@ -37,7 +44,7 @@ class CreditCard(object):
 
     def is_number(self):
         """Returns True if there is at least one digit in number."""
-        if isinstance(self.number, (bytes, str)):
+        if isinstance(self.number, basestring):
             for c in self.number:
                 if c.isdigit():
                     return True
