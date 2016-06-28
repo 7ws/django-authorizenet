@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # from http://github.com/johnboxall/django-paypal
 import re
-from string import digits, split as L
+from string import digits
 
 # Adapted from:
 # http://www.djangosnippets.org/snippets/764/
@@ -19,10 +19,12 @@ CARDS = {
 }
 
 # Well known test numbers
-TEST_NUMBERS = L("378282246310005 371449635398431 378734493671000"
-                 "30569309025904 38520000023237 6011111111111117"
-                 "6011000990139424 555555555554444 5105105105105100"
-                 "4111111111111111 4012888888881881 4222222222222")
+TEST_NUMBERS = [
+    '378282246310005', '371449635398431', '378734493671000', '30569309025904',
+    '38520000023237', '6011111111111117', '6011000990139424',
+    '555555555554444', '5105105105105100', '4111111111111111',
+    '4012888888881881', '4222222222222',
+]
 
 
 def verify_credit_card(number, allow_test=False):
