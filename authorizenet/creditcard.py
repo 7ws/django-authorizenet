@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 # from http://github.com/johnboxall/django-paypal
 import re
-from string import digits
 
 # Adapted from:
 # http://www.djangosnippets.org/snippets/764/
@@ -38,9 +37,10 @@ class CreditCard(object):
 
     def is_number(self):
         """Returns True if there is at least one digit in number."""
-        if isinstance(self.number, basestring):
-            self.number = "".join([c for c in self.number if c in digits])
-            return self.number.isdigit()
+        if isinstance(self.number, (bytes, str)):
+            for c in self.number:
+                if c.isdigit():
+                    return True
         return False
 
     def is_mod10(self):
