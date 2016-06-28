@@ -45,9 +45,10 @@ class CreditCardExpiryWidget(forms.MultiWidget):
 
 
 class CreditCardExpiryField(forms.MultiValueField):
-    EXP_MONTH = [(x, "%02d" % x) for x in xrange(1, 13)]
-    EXP_YEAR = [(x, x) for x in xrange(date.today().year,
-                                       date.today().year + 15)]
+
+    _year = date.today().year
+    EXP_MONTH = [(x, "{0:02d}".format(x)) for x in range(1, 13)]
+    EXP_YEAR = [(x, str(x)) for x in range(_year, _year + 15)]
 
     default_error_messages = {
         'invalid_month': u'Enter a valid month.',
